@@ -14,16 +14,10 @@ import java.security.MessageDigest;
  *
  * @author  Lars Wuckel
  */
-public class MD5Calculator extends FileCalculator{
+public class MD5Calculator extends HashCalculator{
   
-  protected File file;
-  
-  public MD5Calculator (File file){
-    super(file);
-  }
-  
-  public String getMD5 () throws Exception {
-    return getHash ("MD5");
+  public String getHash (File file) throws Exception {
+    return getHash ("MD5",file);
   }
   
 }

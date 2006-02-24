@@ -12,14 +12,9 @@ import java.io.File;
  *
  * @author  Lars Wuckel
  */
-public class SHA1Calculator extends FileCalculator{
+public class SHA1Calculator extends HashCalculator{
   
-  /** Creates a new instance of SHA1Calculator */
-  public SHA1Calculator (File file) {
-    super(file);
-  }
-  
-  public String getSHA1() throws Exception {
-    return getHash ("SHA1");
+  public String getHash(File file)  throws Exception {
+    return getHash ("SHA1",file);
   }
 }
