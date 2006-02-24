@@ -42,7 +42,7 @@ public class DBManager {
 
   public ArrayList<DBFileInfo> getDBFileInfos(int archiveID) throws Exception{
     
-    ArrayList<DBFileInfo> list = new ArrayList();
+    ArrayList<DBFileInfo> list = new ArrayList<DBFileInfo>();
     
     ResultSet rs = statement.executeQuery ("SELECT * FROM dateiinfo WHERE archive_id=" + archiveID);
             
@@ -58,18 +58,18 @@ public class DBManager {
   
   public Hashtable getDBFileInfos() throws Exception{
     
-    Hashtable hashTable = new Hashtable();
+    Hashtable<String, ArrayList<DBFileInfo>> hashTable = new Hashtable<String, ArrayList<DBFileInfo>>();
     
     ResultSet rs = statement.executeQuery ("SELECT * FROM dateiinfo");
             
     while(rs.next ()){
               
       DBFileInfo dbFileInfo = new DBFileInfo(rs);
-      ArrayList<DBFileInfo> list = (ArrayList)hashTable.get (dbFileInfo.getHash ());
+      ArrayList<DBFileInfo> list = (ArrayList<DBFileInfo>)hashTable.get (dbFileInfo.getHash ());
       
       if ( list == null ){
         
-        list = new ArrayList();
+        list = new ArrayList<DBFileInfo>();
         hashTable.put (dbFileInfo.getHash (),list);
       }
       
@@ -81,7 +81,7 @@ public class DBManager {
   
   public Hashtable getHashFileIDHashtable() throws Exception{
     
-    Hashtable hashTable = new Hashtable();
+    Hashtable<String,Integer> hashTable = new Hashtable<String,Integer>();
     
     ResultSet rs = statement.executeQuery ("SELECT id,hash FROM datei");
             
@@ -95,12 +95,12 @@ public class DBManager {
 
   public Hashtable getFileIDPathIDHashtable() throws Exception{
     
-    Hashtable hashTable = new Hashtable();
+    Hashtable<Integer,ArrayList> hashTable = new Hashtable<Integer,ArrayList>();
     
     ResultSet rs = statement.executeQuery ("SELECT datei_id, pfad_id FROM dateipfad ORDER BY datei_id");
     
     int currId = -1;
-    ArrayList pathIdList = null;
+    ArrayList<Integer> pathIdList = null;
             
     while(rs.next ()){
 
@@ -108,7 +108,7 @@ public class DBManager {
       int pathId = rs.getInt (2);
     
       if (currId != fileID){
-        pathIdList = new ArrayList();
+        pathIdList = new ArrayList<Integer>();
         hashTable.put (fileID, pathIdList);
         currId = fileID;
       }
@@ -121,7 +121,7 @@ public class DBManager {
   
   public Hashtable getPathIDHashtable() throws Exception{
     
-    Hashtable hashTable = new Hashtable();
+    Hashtable<String,Integer> hashTable = new Hashtable<String,Integer>();
     
     ResultSet rs = statement.executeQuery ("SELECT id,name FROM pfad");
             
@@ -135,7 +135,7 @@ public class DBManager {
 
   public Hashtable getArchiveIDHashtable() throws Exception{
     
-    Hashtable hashTable = new Hashtable();
+    Hashtable<String,Integer> hashTable = new Hashtable<String,Integer>();
     
     ResultSet rs = statement.executeQuery ("SELECT id,name FROM archiv");
             
