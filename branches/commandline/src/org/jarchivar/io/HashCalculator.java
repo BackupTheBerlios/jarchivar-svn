@@ -7,23 +7,17 @@
 package org.jarchivar.io;
 
 import java.io.*;
-import java.net.URI;
 import java.security.MessageDigest;
 
 /**
  *
  * @author  Lars Wuckel
  */
-public class FileCalculator {
+public abstract class HashCalculator {
   
-  protected File file;
+  public abstract String getHash(File file)  throws Exception ;
   
-  /** Creates a new instance of Calculator */
-  public FileCalculator (File file) {
-    this.file = file;
-  }
-  
-  protected String getHash (String mdName) throws Exception {
+  protected String getHash (String mdName,File file) throws Exception {
     MessageDigest md = MessageDigest.getInstance (mdName);
     byte[] buffer = new byte[4096];
     

@@ -7,8 +7,6 @@
 package org.jarchivar.io;
 
 import java.io.*;
-import java.net.URI;
-import java.security.MessageDigest;
 
 /**
  *
