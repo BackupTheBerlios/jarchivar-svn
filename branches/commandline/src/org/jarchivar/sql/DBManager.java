@@ -215,7 +215,7 @@ public class DBManager {
 
     public void findNewFiles() throws Exception {
 
-        String select = "SELECT pfad,datei_name FROM IMPORT WHERE datei_id IS NULL;";
+        String select = "SELECT pfad,datei_name FROM IMPORT WHERE datei_id IS NULL ORDER BY datei_name;";
         
         ResultSet rs = statement.executeQuery(select);
         printResultSet(rs);
@@ -223,7 +223,7 @@ public class DBManager {
 
     public void findExistingFiles() throws Exception {
 
-        String select = "SELECT pfad,datei_name FROM IMPORT WHERE datei_id IS NOT NULL;";
+        String select = "SELECT pfad,datei_name FROM IMPORT WHERE datei_id IS NOT NULL ORDER BY datei_name;";
         
         ResultSet rs = statement.executeQuery(select);
         printResultSet(rs);
@@ -231,7 +231,7 @@ public class DBManager {
     
     public void findFileName(String name) throws Exception {
 
-        String select = "SELECT archiv,pfad,datei_name FROM DATEIINFO WHERE datei_suchmuster like '%" + name +"%'";
+        String select = "SELECT archiv,pfad,datei_name FROM DATEIINFO WHERE datei_suchmuster like '%" + name +"%' ORDER BY archiv";
         
         ResultSet rs = statement.executeQuery(select);
         printResultSet(rs);
@@ -239,7 +239,7 @@ public class DBManager {
 
     public void findPathName(String name) throws Exception {
 
-        String select = "SELECT archiv,pfad,datei_name FROM DATEIINFO WHERE pfad_suchmuster like '%" + name +"%';";
+        String select = "SELECT archiv,pfad,datei_name FROM DATEIINFO WHERE pfad_suchmuster like '%" + name +"%' ORDER BY archiv;";
         
         ResultSet rs = statement.executeQuery(select);
         printResultSet(rs);
@@ -247,7 +247,7 @@ public class DBManager {
 
     public void listImportedArchive() throws Exception {
 
-        String select = "SELECT DISTINCT archiv_name FROM IMPORT;";
+        String select = "SELECT DISTINCT archiv_name FROM IMPORT ORDER BY archiv_name;";
         
         ResultSet rs = statement.executeQuery(select);
         printResultSet(rs);
@@ -255,7 +255,7 @@ public class DBManager {
     
     public void listArchive() throws Exception {
 
-        String select = "SELECT name FROM ARCHIV;";
+        String select = "SELECT name FROM ARCHIV ORDER BY name;";
         
         ResultSet rs = statement.executeQuery(select);
         printResultSet(rs);
@@ -263,7 +263,7 @@ public class DBManager {
 
     public void listArchiveFiles(String archiveName) throws Exception {
 
-        String select = "SELECT archiv,pfad,datei_name FROM DATEIINFO WHERE archiv_id = (SELECT ID FROM ARCHIV WHERE name = '" + archiveName + "');";
+        String select = "SELECT archiv,pfad,datei_name FROM DATEIINFO WHERE archiv_id = (SELECT ID FROM ARCHIV WHERE name = '" + archiveName + "') ORDER BY archiv;";
         
         ResultSet rs = statement.executeQuery(select);
         printResultSet(rs);
